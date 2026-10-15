@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Моушн одним промптом · навык для Claude Code</title>
+  <meta name="description" content="Бесплатный навык для Claude Code: кинематографичный моушн-ролик с озвучкой одним промптом. Без After Effects и монтажёра.">
+  <meta property="og:title" content="Моушн-ролик одним промптом">
+  <meta property="og:description" content="Навык для Claude Code + пошаговая инструкция. Забирай бесплатно.">
+  <meta property="og:image" content="assets/og.jpg">
+  <meta name="theme-color" content="#0d0a15">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f2214a'/%3E%3Cpath d='M12 9l11 7-11 7z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./">
+        <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M8 5l12 7-12 7z" fill="#fff"/></svg></span>
+        Ольга Пузанова
+      </a>
+      <span class="hide-s">нейросети и ИИ-агенты</span>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="dot"></span>бесплатный навык для Claude Code</span>
+          <h1>
+            <span class="line">Моушн-ролик</span>
+            <span class="line"><span class="hl">одним</span></span>
+            <span class="line">промптом</span>
+          </h1>
+          <p class="lead">Тот самый ролик из рилса: кинетическая типографика, морфинг форм, 3D, плавная камера и озвучка. Без After Effects, шаблонов и монтажёра.</p>
+          <div class="chips">
+            <span class="chip">30 готовых сцен</span>
+            <span class="chip">озвучка бесплатно</span>
+            <span class="chip">без программирования</span>
+          </div>
+
+          <form class="card form" id="lead" novalidate>
+            <div class="form-title">Забери навык и инструкцию</div>
+            <label class="field">
+              <span>Телефон</span>
+              <input class="input" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required>
+            </label>
+            <label class="field">
+              <span>Ник в Telegram</span>
+              <input class="input" id="tg" name="tg" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@username" required>
+            </label>
+            <label class="hp" aria-hidden="true">Сайт <input name="website" tabindex="-1" autocomplete="off"></label>
+            <label class="consent">
+              <input type="checkbox" id="consent" required>
+              <span>Даю согласие на обработку персональных данных и на сообщения от Ольги Пузановой в Telegram</span>
+            </label>
+            <p class="err" id="err" role="alert"></p>
+            <button class="btn" type="submit" id="go">Получить навык <span aria-hidden="true">→</span></button>
+            <p class="note">Сразу после отправки откроется инструкция со ссылкой на скачивание</p>
+          </form>
+        </div>
+
+        <div class="laptop">
+          <span class="sticker">сделано одним промптом</span>
+          <div class="laptop-screen">
+            <video src="assets/reel.mp4" poster="assets/poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="laptop-base"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>кинетическая типографика</span><span>морфинг форм</span><span>3D</span><span>плавная камера</span><span>озвучка</span><span>без After Effects</span>
+      <span>кинетическая типографика</span><span>морфинг форм</span><span>3D</span><span>плавная камера</span><span>озвучка</span><span>без After Effects</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section>
+      <h2 class="reveal">Что внутри</h2>
+      <div class="grid3">
+        <div class="card feat reveal">
+          <span class="feat-num">01 / НАВЫК</span>
+          <h3>Навык motion-reel</h3>
+          <p>Готовый шаблон ролика из рилса: 30 анимированных сцен, озвучка, рендер в MP4. Claude сам ставит всё нужное и собирает видео.</p>
+        </div>
+        <div class="card feat reveal">
+          <span class="feat-num">02 / ПРОМПТ</span>
+          <h3>Промпт из ролика</h3>
+          <p>Вставляешь, жмёшь Enter и получаешь видео. Есть второй промпт: под свою тему, свой текст и свой голос.</p>
+        </div>
+        <div class="card feat reveal">
+          <span class="feat-num">03 / ИНСТРУКЦИЯ</span>
+          <h3>Пошаговая установка</h3>
+          <p>Как поставить Claude Code и навык за 10 минут. Для Mac и Windows, с готовыми командами.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" style="text-align:center; display:grid; gap:18px; justify-items:center;">
+      <h2>Хочешь <span class="red">так же?</span></h2>
+      <p class="lead" style="margin:0 auto;">Оставь телефон и ник в Telegram, навык откроется сразу.</p>
+      <a class="btn" href="#lead" id="toform">Забрать навык <span aria-hidden="true">→</span></a>
+    </section>
+
+    <footer>
+      <span>© Ольга Пузанова</span>
+      <span>Навык для Claude Code · Remotion</span>
+    </footer>
+  </div>
+
+  <script>
+    // Адрес приёмника заявок (Railway): шлёт заявку в Telegram
+    var ENDPOINT = "https://motion-leads-production.up.railway.app/lead";
+    var KEY = "motion-reel-access";
+
+    var form = document.getElementById("lead");
+    var phone = document.getElementById("phone");
+    var tg = document.getElementById("tg");
+    var consent = document.getElementById("consent");
+    var err = document.getElementById("err");
+    var go = document.getElementById("go");
+
+    function remember() { try { localStorage.setItem(KEY, "1"); } catch (e) {} }
+    function openGuide() { location.href = "guide.html"; }
+
+    // маска телефона: +7 900 000-00-00 для российских номеров
+    phone.addEventListener("input", function () {
+      var d = phone.value.replace(/\D/g, "");
+      if (!d) { phone.value = ""; return; }
+      if (d[0] === "8") d = "7" + d.slice(1);
+      if (d[0] === "9") d = "7" + d;
+      if (d[0] !== "7") { phone.value = "+" + d.slice(0, 15); return; }
+      var p = "+7";
+      if (d.length > 1) p += " " + d.slice(1, 4);
+      if (d.length > 4) p += " " + d.slice(4, 7);
+      if (d.length > 7) p += "-" + d.slice(7, 9);
+      if (d.length > 9) p += "-" + d.slice(9, 11);
+      phone.value = p;
+    });
+    tg.addEventListener("input", function () {
+      var v = tg.value.replace(/https?:\/\/t\.me\//i, "").replace(/\s/g, "");
+      if (v && v[0] !== "@") v = "@" + v;
+      tg.value = v;
+    });
+
+    function bad(el, msg) { el.classList.add("bad"); err.textContent = msg; el.focus(); return false; }
+    [phone, tg].forEach(function (el) { el.addEventListener("focus", function () { el.classList.remove("bad"); }); });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      err.textContent = "";
+      var digits = phone.value.replace(/\D/g, "");
+      if (digits.length < 10 || digits.length > 15) return bad(phone, "Проверь номер телефона");
+      if (!/^@[A-Za-z0-9_]{4,32}$/.test(tg.value)) return bad(tg, "Ник в Telegram: латиница, цифры и _, от 4 символов");
+      if (!consent.checked) { err.textContent = "Поставь галочку согласия"; return; }
+
+      go.disabled = true;
+      go.firstChild.textContent = "Отправляю… ";
+      var body = JSON.stringify({
+        phone: phone.value, tg: tg.value, consent: true,
+        website: form.website.value,
+        src: (new URLSearchParams(location.search).get("utm_source") || document.referrer || "прямой заход").slice(0, 100)
+      });
+      var done = false;
+      function finish() { if (done) return; done = true; remember(); openGuide(); }
+      // если сервер не ответил за 6 секунд, всё равно пускаем к инструкции
+      setTimeout(finish, 6000);
+      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: body })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+        .then(function (x) {
+          if (!x.r.ok && x.j && (x.j.error === "phone" || x.j.error === "tg")) {
+            done = true; go.disabled = false; go.firstChild.textContent = "Получить навык ";
+            return x.j.error === "phone" ? bad(phone, "Проверь номер телефона") : bad(tg, "Проверь ник в Telegram");
+          }
+          finish();
+        })
+        .catch(finish);
+    });
+
+    // плавное появление блоков
+    var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: 0.15 }) : null;
+    document.querySelectorAll(".reveal").forEach(function (el) { io ? io.observe(el) : el.classList.add("in"); });
+
+    document.getElementById("toform").addEventListener("click", function (e) {
+      e.preventDefault();
+      form.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(function () { phone.focus({ preventScroll: true }); }, 500);
+    });
+  </script>
+</body>
+</html>

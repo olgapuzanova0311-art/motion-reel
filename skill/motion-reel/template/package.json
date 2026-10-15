@@ -1,0 +1,21 @@
+{
+  "name": "motion-reel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render src/index.ts reel out/reel.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/google-fonts": "4.0.529",
+    "@remotion/install-whisper-cpp": "4.0.529",
+    "remotion": "4.0.529",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}

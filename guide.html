@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Инструкция · навык motion-reel</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0d0a15">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f2214a'/%3E%3Cpath d='M12 9l11 7-11 7z' fill='white'/%3E%3C/svg%3E">
+  <script>
+    // доступ к инструкции только после заявки
+    try { if (localStorage.getItem("motion-reel-access") !== "1") location.replace("./"); } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./">
+        <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M8 5l12 7-12 7z" fill="#fff"/></svg></span>
+        Ольга Пузанова
+      </a>
+      <span class="hide-s">навык motion-reel</span>
+    </header>
+
+    <main>
+      <section style="padding-top:24px; display:grid; gap:20px;">
+        <span class="eyebrow"><span class="dot"></span>заявка принята</span>
+        <h1>Держи <span class="red">навык</span></h1>
+        <p class="lead">Пять шагов, и первый ролик будет готов. Установка займёт минут 10, сам ролик Claude соберёт ещё минут за 10.</p>
+        <div class="card dl">
+          <a class="btn" href="download/motion-reel.zip" download>Скачать навык <span aria-hidden="true">↓</span></a>
+          <small>motion-reel.zip · навык + шаблон на 30 сцен</small>
+        </div>
+      </section>
+
+      <section style="padding-top:10px;">
+        <h2>Как запустить</h2>
+        <div class="steps">
+
+          <div class="step reveal">
+            <div class="step-n">1</div>
+            <div class="step-body">
+              <h3>Поставь Claude Code</h3>
+              <p>Нужна подписка <b>Claude Pro</b> или выше. Скачай приложение Claude для компьютера и открой вкладку <b>Code</b>, или поставь Claude Code в терминал.</p>
+              <div class="dl">
+                <a class="btn btn-ghost" href="https://claude.ai/download" target="_blank" rel="noopener">Скачать Claude</a>
+                <a class="btn btn-ghost" href="https://docs.claude.com/ru/docs/claude-code/overview" target="_blank" rel="noopener">Claude Code в терминале</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-n">2</div>
+            <div class="step-body">
+              <h3>Скачай навык</h3>
+              <p>Нажми кнопку выше. Файл <b>motion-reel.zip</b> окажется в папке «Загрузки». Распаковывать его вручную не нужно.</p>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-n">3</div>
+            <div class="step-body">
+              <h3>Подключи навык</h3>
+              <p><b>Самый простой способ:</b> открой Claude Code и отправь ему это сообщение. Он сам распакует навык куда нужно.</p>
+              <div class="code" data-copy>Установи навык из архива motion-reel.zip в папке «Загрузки»: распакуй его в ~/.claude/skills/ так, чтобы получилось ~/.claude/skills/motion-reel/SKILL.md<button class="copy" type="button">Копировать</button></div>
+              <p>Или вручную, командой в терминале:</p>
+              <div class="tabs" role="tablist">
+                <button class="tab" role="tab" aria-selected="true" data-tab="mac">Mac</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="win">Windows</button>
+              </div>
+              <div class="panel" data-panel="mac"><div class="code" data-copy>mkdir -p ~/.claude/skills && unzip -o ~/Downloads/motion-reel.zip -d ~/.claude/skills/<button class="copy" type="button">Копировать</button></div></div>
+              <div class="panel" data-panel="win" hidden><div class="code" data-copy>Expand-Archive -Force "$env:USERPROFILE\Downloads\motion-reel.zip" "$env:USERPROFILE\.claude\skills"<button class="copy" type="button">Копировать</button></div></div>
+              <p class="tip"><b>Важно:</b> после установки начни в Claude Code новый чат, чтобы он увидел навык.</p>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-n">4</div>
+            <div class="step-body">
+              <h3>Вставь промпт и жми Enter</h3>
+              <div class="tabs" role="tablist">
+                <button class="tab" role="tab" aria-selected="true" data-tab="same">Как в рилсе</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="own">Своя тема</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="voice">Своим голосом</button>
+              </div>
+              <div class="panel" data-panel="same">
+                <div class="code" data-copy>Используй навык motion-reel. Сделай <span class="hl">15-секундную</span> кинематографичную анимацию: <span class="hl">кинетическая</span> <span class="hl">типографика</span>, <span class="hl">морфинг</span> <span class="hl">форм</span>, <span class="hl">3D</span>, <span class="hl">плавная</span> <span class="hl">камера</span>. Возьми готовый сценарий из шаблона, озвучь его и отрендери видео. Всё нужное для работы установи сам.<button class="copy" type="button">Копировать</button></div>
+              </div>
+              <div class="panel" data-panel="own" hidden>
+                <div class="code" data-copy>Используй навык motion-reel. Сделай кинематографичную анимацию на 40 секунд: кинетическая типографика, морфинг форм, 3D, плавная камера. Тема: [О ЧЁМ РОЛИК]. Напиши живой сценарий с хуком в начале и призывом в конце написать в комментах слово «[КОДОВОЕ СЛОВО]». Подбери сцены под текст, озвучь женским голосом и отрендери. Всё нужное для работы установи сам.<button class="copy" type="button">Копировать</button></div>
+                <p>Замени то, что в квадратных скобках, на своё.</p>
+              </div>
+              <div class="panel" data-panel="voice" hidden>
+                <div class="code" data-copy>Используй навык motion-reel. Я записал(а) голос: [ПУТЬ К ФАЙЛУ, например ~/Downloads/voice.mp3]. Нарежь запись по фразам под сцены, ускорь в 1,3 раза и отрендери ролик с моим голосом.<button class="copy" type="button">Копировать</button></div>
+                <p>Сначала попроси Claude показать текст сценария, прочитай его вслух одним файлом (голосовое с телефона подойдёт) и отправь путь к файлу. Живой голос звучит лучше любого синтеза.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-n">5</div>
+            <div class="step-body">
+              <h3>Забирай видео</h3>
+              <p>Claude сам поставит всё нужное, соберёт сцены, озвучит и отрендерит ролик. В конце он пришлёт путь к готовому файлу <b>reel_final.mp4</b>.</p>
+              <p class="tip"><b>Как снять рилс, как у меня:</b> включи ролик на ноутбуке во весь экран и сними экран на телефон вертикально. Хочешь, чтобы что-то было иначе? Просто напиши Claude: «сделай быстрее», «поменяй цвет на синий», «убери эту фразу».</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="reveal">Вопросы</h2>
+        <div style="margin-top:18px;">
+          <details>
+            <summary>Нужно ли уметь программировать?</summary>
+            <p>Нет. Код пишет и запускает Claude, ты только вставляешь промпт и говоришь, что поменять.</p>
+          </details>
+          <details>
+            <summary>Сколько это стоит?</summary>
+            <p>Навык бесплатный. Нужна подписка Claude Pro. Озвучка синтезом бесплатная, программы для рендера тоже.</p>
+          </details>
+          <details>
+            <summary>Подойдёт Windows?</summary>
+            <p>Да, работает на Mac и Windows. Нужен компьютер, на телефоне не получится.</p>
+          </details>
+          <details>
+            <summary>Голос ставит неправильные ударения</summary>
+            <p>Попроси Claude: «поставь ударения апострофом во всех словах и переозвучь». Или запиши текст своим голосом, это звучит живее всего.</p>
+          </details>
+          <details>
+            <summary>Что-то не устанавливается</summary>
+            <p>Скопируй ошибку и отправь её Claude со словами «почини». Обычно он сам ставит недостающее: Node.js, ffmpeg или uv.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© Ольга Пузанова</span>
+      <a href="https://agent.olgapuzanovva.ru/" target="_blank" rel="noopener">Хочешь собрать свою ИИ-команду? →</a>
+    </footer>
+  </div>
+
+  <script>
+    // копирование промптов и команд
+    document.querySelectorAll("[data-copy]").forEach(function (box) {
+      var btn = box.querySelector(".copy");
+      btn.addEventListener("click", function () {
+        var text = Array.prototype.filter.call(box.childNodes, function (n) { return n !== btn; })
+          .map(function (n) { return n.textContent; }).join("").trim();
+        function ok() { btn.textContent = "Скопировано"; btn.classList.add("done"); setTimeout(function () { btn.textContent = "Копировать"; btn.classList.remove("done"); }, 1800); }
+        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+        function fallback() {
+          var t = document.createElement("textarea"); t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+          document.body.appendChild(t); t.select(); try { document.execCommand("copy"); ok(); } catch (e) {} document.body.removeChild(t);
+        }
+      });
+    });
+    // вкладки
+    document.querySelectorAll(".tabs").forEach(function (tabs) {
+      var buttons = tabs.querySelectorAll(".tab");
+      var scope = tabs.parentElement;
+      buttons.forEach(function (b) {
+        b.addEventListener("click", function () {
+          buttons.forEach(function (x) {
+            x.setAttribute("aria-selected", x === b ? "true" : "false");
+            var p = scope.querySelector('[data-panel="' + x.dataset.tab + '"]');
+            if (p) p.hidden = x !== b;
+          });
+        });
+      });
+    });
+    var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 }) : null;
+    document.querySelectorAll(".reveal").forEach(function (el) { io ? io.observe(el) : el.classList.add("in"); });
+  </script>
+</body>
+</html>
