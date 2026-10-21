@@ -381,7 +381,7 @@ fm.addEventListener("submit",e=>{
   sb.disabled=true;sb.textContent="Открываю…";
   let done=false;const fin=()=>{if(done)return;done=true;try{localStorage.setItem(KEY,"1")}catch(e){}unlock(true)};
   setTimeout(fin,6000);
-  fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone:ph.value,tg:tgI.value,consent:true,product:"automontazh",website:fm.website.value,src:(new URLSearchParams(location.search).get("utm_source")||document.referrer||"прямой заход").slice(0,100)})})
+  fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone:ph.value,tg:tgI.value,consent:true,product:"automontazh",website:fm.website.value,src:("ГАЙД АВТОМОНТАЖА · "+(new URLSearchParams(location.search).get("utm_source")||document.referrer||"прямой заход")).slice(0,100)})})
    .then(r=>r.json().catch(()=>({})).then(j=>({r,j})))
    .then(x=>{if(!x.r.ok&&x.j&&(x.j.error==="phone"||x.j.error==="tg")){done=true;sb.disabled=false;sb.textContent="Открыть гайд";return x.j.error==="phone"?bad(ph,"Проверь номер телефона"):bad(tgI,"Проверь ник в Telegram")}fin()})
    .catch(fin);
