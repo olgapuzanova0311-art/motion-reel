@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>5 модов для Claude Code</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Unbounded:wght@700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>/* Вертикальная лента карточек, крупная типографика, тёмная тема Ольги */
+:root{--bg:#0E0E0E;--card:#171716;--line:#2A2926;--ink:#F4F1EA;--mut:#9A968E;--or:#E8744F;--bl:#6E9BFF;--code:#0A0A0A;
+--disp:"Unbounded","Montserrat",system-ui,sans-serif;--body:"Montserrat",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:99px;padding:6px 16px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);width:max-content}
+.badge i{width:9px;height:9px;border-radius:50%;background:var(--or)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,56px);line-height:1.05;margin:0;text-wrap:balance}
+h1 em,h2 em{font-style:normal;color:var(--or)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(22px,4.4vw,30px);line-height:1.15;margin:0;text-wrap:balance}
+.lead{font-size:19px;color:var(--ink);max-width:62ch;margin:0}
+p{margin:0;max-width:65ch}.mut{color:var(--mut)}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.num{font-family:var(--disp);font-weight:800;color:var(--or);font-size:15px;letter-spacing:.06em}
+.code{position:relative;background:var(--code);border:1.5px solid var(--line);border-radius:14px;min-width:0}
+.code pre{margin:0;padding:16px 16px 16px;overflow-x:auto;font-family:var(--mono);font-size:14.5px;line-height:1.6;color:var(--ink);white-space:pre}
+.code button{position:absolute;top:8px;right:8px;background:var(--line);color:var(--ink);border:0;border-radius:9px;padding:6px 12px;font:600 13px var(--body);cursor:pointer}
+.code button:focus-visible,a:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+a{color:var(--bl);font-weight:700;text-decoration:none;word-break:break-word}
+a.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--or);color:#140A05;border-radius:14px;padding:14px 22px;font-weight:800;width:max-content;max-width:100%}
+.steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--disp);font-weight:700;font-size:clamp(15px,3.6vw,20px)}
+.steps span{background:var(--code);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-variant-numeric:tabular-nums}
+.steps b{color:var(--mut);font-weight:400}.steps .hit{border-color:var(--or);color:var(--or)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.warn{border-color:var(--or)}
+.foot{border-top:1.5px solid var(--line);padding-top:22px;display:flex;flex-direction:column;gap:12px}
+</style>
+</head><body>
+<main class="wrap">
+<span class="badge"><i></i>Подборка · бесплатно</span>
+<h1>5 модов для <em>Claude Code</em></h1>
+<p class="lead">Мод это маленькая программа внутри Claude Code, которая меняет его внешний вид и добавляет новые умения. Ниже ссылки на все пять из ролика и команды, чтобы их поставить.</p>
+<section class="card"><span class="num">МОД 1</span><h2>Token Weather</h2><p>Прогноз погоды для контекста над полем ввода. Солнце, когда места много, ливень, когда занято больше половины, гроза, когда контекст скоро сожмётся. Официальный пример от Anthropic.</p><div class="code"><pre>git clone https://github.com/anthropics/claude-code-playground.git
+cd claude-code-playground/claude-code/mods
+claude --plugin-dir ./token-weather</pre><button type="button">Копировать</button></div><p class="mut">Так мод включится на одну сессию. Нужна версия Claude Code 2.1.287 или новее.</p><a href="https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods">github.com/anthropics/claude-code-playground/tree/main/claude-code/mods</a></section><section class="card"><span class="num">МОД 2</span><h2>cctop</h2><p>Следит за сессиями: токены, кэш, контекст, лимиты и сколько стоит работа. Запускается в соседнем окне терминала, как диспетчер задач для Claude Code.</p><div class="code"><pre>brew install stefanprodan/tap/cctop
+cctop</pre><button type="button">Копировать</button></div><p class="mut">Без Homebrew: curl -fsSL https://raw.githubusercontent.com/stefanprodan/cctop/main/install.sh | sh</p><a href="https://github.com/stefanprodan/cctop">github.com/stefanprodan/cctop</a></section><section class="card"><span class="num">МОД 3</span><h2>Prismantis</h2><p>Делает ответы наглядными: таблицы, графики, диаграммы и подсветка кода в 15 темах, с кнопками копирования.</p><div class="code"><pre>/plugin marketplace add NahumLitvin/prismantis
+/plugin install prismantis@prismantis
+/prismantis setup</pre><button type="button">Копировать</button></div><p class="mut">Последняя команда открывает выбор темы. Выключить мод можно через /plugin.</p><a href="https://github.com/NahumLitvin/prismantis">github.com/NahumLitvin/prismantis</a></section><section class="card"><span class="num">МОД 4</span><h2>Flow</h2><p>Живое дерево сабагентов рядом с перепиской: кто чем занят, сколько было вызовов и кто завис.</p><div class="code"><pre>claude plugin marketplace add Charlie0113-T/claude-agent-flow
+claude plugin install agent-flow@claude-agent-flow</pre><button type="button">Копировать</button></div><p class="mut">Потом в Claude Code набери /flow и попроси Claude запустить сабагентов.</p><a href="https://github.com/Charlie0113-T/claude-agent-flow">github.com/Charlie0113-T/claude-agent-flow</a></section><section class="card"><span class="num">МОД 5</span><h2>Doom</h2><p>Запускает Doom прямо в панели Claude Code, чтобы было чем заняться, пока Claude работает.</p><div class="code"><pre>/plugin install intermission --marketplace jarrodwatts/intermission
+/intermission</pre><button type="button">Копировать</button></div><p class="mut">Работает на macOS 15 в терминалах Ghostty или kitty, на Windows в Rio. При первом запуске скачает игру, около 20 МБ. Выключить: /intermission off</p><a href="https://github.com/jarrodwatts/intermission">github.com/jarrodwatts/intermission</a></section>
+<section class="card">
+<h2>Как поставить любой мод</h2>
+<ul>
+<li>В приложении нажми плюс у поля ввода, выбери Plugins и Add Plugin.</li>
+<li>В терминале набери /plugin.</li>
+<li>Если мод лежит на GitHub, сначала добавь репозиторий, потом установи мод:</li>
+</ul>
+<div class="code"><pre>/plugin marketplace add автор/репозиторий
+/plugin install название@репозиторий</pre><button type="button">Копировать</button></div>
+</section>
+<section class="card">
+<h2>Свой мод за одну просьбу</h2>
+<p>Попроси Claude, например:</p>
+<div class="code"><pre>Сделай мод, который показывает над полем ввода, сколько токенов в кэше</pre><button type="button">Копировать</button></div>
+<p class="mut">Такой мод живёт только в текущей сессии. Чтобы он остался, сохрани его папку и запускай Claude с флагом:</p>
+<div class="code"><pre>claude --plugin-dir ./папка-мода</pre><button type="button">Копировать</button></div>
+</section>
+<section class="card warn">
+<h2>Про <em>безопасность</em></h2>
+<p>Мод работает с твоими правами и без песочницы. Ставь моды только от тех, кому доверяешь, и перед установкой загляни в код репозитория.</p>
+</section>
+<div class="foot"><p class="mut">Больше разборов нейросетей и готовых навыков в моём Телеграм-канале</p><a class="btn" href="https://t.me/aivwb">Перейти в канал @aivwb</a></div>
+</main><script>document.querySelectorAll(".code button").forEach(b=>b.addEventListener("click",async()=>{const t=b.parentElement.querySelector("pre").innerText;try{await navigator.clipboard.writeText(t);b.textContent="Скопировано"}catch(e){const r=document.createRange();r.selectNodeContents(b.parentElement.querySelector("pre"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Выделено, нажми копировать"}setTimeout(()=>b.textContent="Копировать",2000)}));</script></body></html>
