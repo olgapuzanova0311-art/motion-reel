@@ -29,12 +29,34 @@ a.btn{display:inline-flex;align-items:center;justify-content:center;background:v
 ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .warn{border-color:var(--or)}
 .foot{border-top:1.5px solid var(--line);padding-top:22px;display:flex;flex-direction:column;gap:12px}
+[hidden]{display:none!important}#guide{display:flex;flex-direction:column;gap:28px}
+.gate{background:var(--card);border:1.5px solid var(--or);border-radius:22px;padding:22px;display:grid;gap:14px}
+.gate h2{margin:0}.gate p{color:var(--mut);font-size:16px}
+.fld{display:grid;gap:6px}.fld label{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.in{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--code);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px}
+.in:focus{outline:none;border-color:var(--bl)}.in.bad{border-color:#E5484D}
+.ok-row{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:14px;color:var(--mut)}
+.ok-row input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--or)}
+.err{min-height:20px;color:#E5484D;font-size:14px;font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.gate button{width:100%;border:0;background:var(--or);color:#140A05;border-radius:14px;padding:15px 22px;font:800 16px var(--body);cursor:pointer}.gate button:disabled{opacity:.6}
 </style>
 </head><body>
 <main class="wrap">
 <span class="badge"><i></i>Бесплатный скилл · open source</span>
 <h1>Geo Sleuth находит, <em>где сделано фото</em></h1>
 <p class="lead">Скилл для Claude Code, Codex и Cursor. Ты даёшь ему фото без геометки, вывесок и номеров, а он возвращает точку съёмки и направление камеры.</p>
+<form class="gate" id="lead" novalidate>
+<h2>Открой скилл бесплатно</h2>
+<p>Оставь телефон и ник в Telegram, и всё откроется прямо на этой странице.</p>
+<div class="fld"><label for="phone">Телефон</label><input class="in" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></div>
+<div class="fld"><label for="tg">Ник в Telegram</label><input class="in" id="tg" name="tg" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@username" required></div>
+<label class="hp" aria-hidden="true">Сайт <input name="website" tabindex="-1" autocomplete="off"></label>
+<label class="ok-row"><input type="checkbox" id="consent" checked><span>Согласна(ен) на обработку персональных данных и получение материалов от Ольги Пузановой</span></label>
+<div class="err" id="err" role="alert"></div>
+<button id="send" type="submit">Открыть</button>
+</form>
+<div id="guide" hidden>
 
 <section class="card">
 <h2>Как он нашёл место из ролика</h2>
@@ -77,5 +99,23 @@ ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 <p>Скилл бесплатный, лицензия MIT. Код, примеры и подробная инструкция на GitHub:</p>
 <a class="btn" href="https://github.com/Oldcircle/geo-sleuth">Открыть Geo Sleuth на GitHub</a>
 </section>
+</div>
 <div class="foot"><p class="mut">Больше разборов нейросетей и готовых навыков в моём Телеграм-канале</p><a class="btn" href="https://t.me/aivwb">Перейти в канал @aivwb</a></div>
-</main><script>document.querySelectorAll(".code button").forEach(b=>b.addEventListener("click",async()=>{const t=b.parentElement.querySelector("pre").innerText;try{await navigator.clipboard.writeText(t);b.textContent="Скопировано"}catch(e){const r=document.createRange();r.selectNodeContents(b.parentElement.querySelector("pre"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Выделено, нажми копировать"}setTimeout(()=>b.textContent="Копировать",2000)}));</script></body></html>
+</main><script>document.querySelectorAll(".code button").forEach(b=>b.addEventListener("click",async()=>{const t=b.parentElement.querySelector("pre").innerText;try{await navigator.clipboard.writeText(t);b.textContent="Скопировано"}catch(e){const r=document.createRange();r.selectNodeContents(b.parentElement.querySelector("pre"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Выделено, нажми копировать"}setTimeout(()=>b.textContent="Копировать",2000)}));</script><script>
+const ENDPOINT="https://motion-leads-production.up.railway.app/lead",KEY="geo-access";
+const fm=document.getElementById("lead"),ph=document.getElementById("phone"),tgI=document.getElementById("tg"),er=document.getElementById("err"),sb=document.getElementById("send");
+function unlock(s){fm.hidden=true;const g=document.getElementById("guide");g.hidden=false;if(s)setTimeout(()=>g.scrollIntoView({behavior:"smooth",block:"start"}),150)}
+try{if(localStorage.getItem(KEY))unlock(false)}catch(e){}
+ph.addEventListener("input",()=>{let d=ph.value.replace(/\D/g,"");if(!d){ph.value="";return}if(d[0]==="8")d="7"+d.slice(1);if(d[0]==="9")d="7"+d;if(d[0]!=="7"){ph.value="+"+d.slice(0,15);return}let p="+7";if(d.length>1)p+=" "+d.slice(1,4);if(d.length>4)p+=" "+d.slice(4,7);if(d.length>7)p+="-"+d.slice(7,9);if(d.length>9)p+="-"+d.slice(9,11);ph.value=p});
+tgI.addEventListener("input",()=>{let v=tgI.value.replace(/https?:\/\/t\.me\//i,"").replace(/\s/g,"");if(v&&v[0]!=="@")v="@"+v;tgI.value=v});
+[ph,tgI].forEach(el=>el.addEventListener("focus",()=>el.classList.remove("bad")));
+function bad(el,m){el.classList.add("bad");er.textContent=m;el.focus()}
+fm.addEventListener("submit",e=>{e.preventDefault();er.textContent="";
+const dg=ph.value.replace(/\D/g,"");if(dg.length<10||dg.length>15)return bad(ph,"Проверь номер телефона");
+if(!/^@[A-Za-z0-9_]{4,32}$/.test(tgI.value))return bad(tgI,"Ник в Telegram: латиница, цифры и _, от 4 символов");
+if(!document.getElementById("consent").checked){er.textContent="Поставь галочку согласия";return}
+sb.disabled=true;sb.textContent="Открываю…";let done=false;const fin=()=>{if(done)return;done=true;try{localStorage.setItem(KEY,"1")}catch(e){}unlock(true)};setTimeout(fin,6000);
+fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone:ph.value,tg:tgI.value,consent:true,product:"geo",website:fm.website.value,src:("СКИЛЛ ГЕО · "+(new URLSearchParams(location.search).get("utm_source")||document.referrer||"прямой заход")).slice(0,100)})})
+.then(r=>r.json().catch(()=>({})).then(j=>({r,j}))).then(x=>{if(!x.r.ok&&x.j&&(x.j.error==="phone"||x.j.error==="tg")){done=true;sb.disabled=false;sb.textContent="Открыть";return x.j.error==="phone"?bad(ph,"Проверь номер телефона"):bad(tgI,"Проверь ник в Telegram")}fin()}).catch(fin)});
+</script>
+</body></html>
