@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Презентация за 1 запрос</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Unbounded:wght@700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>/* Вертикальная лента карточек, крупная типографика, тёмная тема Ольги */
+:root{--bg:#0E0E0E;--card:#171716;--line:#2A2926;--ink:#F4F1EA;--mut:#9A968E;--or:#E8744F;--bl:#6E9BFF;--code:#0A0A0A;
+--disp:"Unbounded","Montserrat",system-ui,sans-serif;--body:"Montserrat",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:99px;padding:6px 16px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);width:max-content}
+.badge i{width:9px;height:9px;border-radius:50%;background:var(--or)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,56px);line-height:1.05;margin:0;text-wrap:balance}
+h1 em,h2 em{font-style:normal;color:var(--or)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(22px,4.4vw,30px);line-height:1.15;margin:0;text-wrap:balance}
+.lead{font-size:19px;color:var(--ink);max-width:62ch;margin:0}
+p{margin:0;max-width:65ch}.mut{color:var(--mut)}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.num{font-family:var(--disp);font-weight:800;color:var(--or);font-size:15px;letter-spacing:.06em}
+.code{position:relative;background:var(--code);border:1.5px solid var(--line);border-radius:14px;min-width:0}
+.code pre{margin:0;padding:48px 16px 16px;overflow-x:auto;font-family:var(--mono);font-size:14.5px;line-height:1.6;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.code button{position:absolute;top:8px;right:8px;background:var(--line);color:var(--ink);border:0;border-radius:9px;padding:6px 12px;font:600 13px var(--body);cursor:pointer}
+.code button:focus-visible,a:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+a{color:var(--bl);font-weight:700;text-decoration:none;word-break:break-word}
+a.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--or);color:#140A05;border-radius:14px;padding:14px 22px;font-weight:800;width:max-content;max-width:100%}
+.steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--disp);font-weight:700;font-size:clamp(15px,3.6vw,20px)}
+.steps span{background:var(--code);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-variant-numeric:tabular-nums}
+.steps b{color:var(--mut);font-weight:400}.steps .hit{border-color:var(--or);color:var(--or)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.warn{border-color:var(--or)}
+.foot{border-top:1.5px solid var(--line);padding-top:22px;display:flex;flex-direction:column;gap:12px}
+[hidden]{display:none!important}#guide{display:flex;flex-direction:column;gap:28px}
+.gate{background:var(--card);border:1.5px solid var(--or);border-radius:22px;padding:22px;display:grid;gap:14px}
+.gate h2{margin:0}.gate p{color:var(--mut);font-size:16px}
+.fld{display:grid;gap:6px}.fld label{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.in{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--code);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px}
+.in:focus{outline:none;border-color:var(--bl)}.in.bad{border-color:#E5484D}
+.ok-row{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:14px;color:var(--mut)}
+.ok-row input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--or)}
+.err{min-height:20px;color:#E5484D;font-size:14px;font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.gate button{width:100%;border:0;background:var(--or);color:#140A05;border-radius:14px;padding:15px 22px;font:800 16px var(--body);cursor:pointer}.gate button:disabled{opacity:.6}
+</style>
+</head><body>
+<main class="wrap">
+<span class="badge"><i></i>Гайд · бесплатно</span>
+<h1>Презентация в твоём стиле <em>за 1 запрос</em></h1>
+<p class="lead">Секрет в двух вещах: навыки, которые Claude подключает сам, и запрос из четырёх пунктов. Ниже все навыки из ролика с командами установки и готовый шаблон запроса.</p>
+<form class="gate" id="lead" novalidate>
+<h2>Открой гайд бесплатно</h2>
+<p>Оставь телефон и ник в Telegram, и всё откроется прямо на этой странице.</p>
+<div class="fld"><label for="phone">Телефон</label><input class="in" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></div>
+<div class="fld"><label for="tg">Ник в Telegram</label><input class="in" id="tg" name="tg" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@username" required></div>
+<label class="hp" aria-hidden="true">Сайт <input name="website" tabindex="-1" autocomplete="off"></label>
+<label class="ok-row"><input type="checkbox" id="consent" checked><span>Согласна(ен) на обработку персональных данных и получение материалов от Ольги Пузановой</span></label>
+<div class="err" id="err" role="alert"></div>
+<button id="send" type="submit">Открыть</button>
+</form>
+<div id="guide" hidden>
+<div class="steps"><span class="hit">1 · навыки</span><b>+</b><span class="hit">2 · запрос</span><b>=</b><span>готовая презентация</span></div>
+<h2>Шаг 1. <em>Навыки</em></h2>
+<p>Навык это готовая инструкция для Claude. Ставишь один раз, дальше Claude включает его сам, когда видит, что задача подходит. Команды вводи в Claude Code по одной строке.</p>
+<section class="card"><span class="num">НАВЫК 1</span><h2>Frontend Design</h2><p>Верстает слайды как дизайнер: смелая типографика, продуманные цвета, анимации. Официальный навык от Anthropic.</p><div class="code"><pre>/plugin install frontend-design@claude-plugins-official</pre><button type="button">Копировать</button></div><p class="mut">Если Claude Code не находит его, сначала добавь каталог: /plugin marketplace add anthropics/claude-plugins-official</p><a href="https://github.com/anthropics/claude-plugins-official">github.com/anthropics/claude-plugins-official</a></section>
+<section class="card"><span class="num">НАВЫК 2</span><h2>UI UX Pro Max</h2><p>Подбирает шрифты, цвета и сетку под тему и аудиторию презентации.</p><div class="code"><pre>/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill</pre><button type="button">Копировать</button></div><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">github.com/nextlevelbuilder/ui-ux-pro-max-skill</a></section>
+<section class="card"><span class="num">НАВЫК 3</span><h2>Anti-slop</h2><p>Убирает дешёвый нейросетевой дизайн: однотипные градиенты, лишние эмодзи, шаблонные карточки и пустые фразы.</p><div class="code"><pre>/plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
+/plugin install antislop@anti-slop</pre><button type="button">Копировать</button></div><a href="https://github.com/miqdadbadjuber/anti-slop">github.com/miqdadbadjuber/anti-slop</a></section>
+<section class="card"><span class="num">НАВЫК 4</span><h2>Твой фирменный стиль</h2><p>Этот навык делаешь сама один раз. Он ставит в каждую презентацию твои цвета, шрифты и логотип, и не приходится объяснять заново. Скопируй запрос, заполни скобки и отправь Claude:</p><div class="code"><pre>Создай навык brand-style для моих презентаций, документов и сайтов.
+Мои цвета: [основной, фон, акцент, например #0E0E0E, #F4F1EA, #6E9BFF]
+Шрифты: [для заголовков и для текста]
+Логотип: [путь к файлу]
+Настроение: [например строгий, тёплый, футуристичный]
+Чего не делать: [например никаких градиентов и эмодзи]
+Применяй его сам каждый раз, когда я прошу презентацию или дизайн.</pre><button type="button">Копировать</button></div><p class="mut">Нет фирменных цветов? Пришли Claude скриншот своего профиля или сайта и попроси взять стиль оттуда.</p></section>
+<section class="card"><span class="num">НАВЫК 5</span><h2>PPTX</h2><p>Отдаёт презентацию файлом для PowerPoint, Keynote и Google Slides, который можно править. Официальный навык от Anthropic.</p><div class="code"><pre>/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills</pre><button type="button">Копировать</button></div><p class="mut">В этом наборе ещё навыки для Word, Excel и PDF.</p><a href="https://github.com/anthropics/skills">github.com/anthropics/skills</a></section>
+<section class="card"><h2>Проверь, что всё встало</h2><p>Перезапусти Claude Code и набери /plugin. Во вкладке установленных должны быть все навыки. Или просто спроси Claude: «Какие навыки у тебя есть?»</p></section>
+<h2>Шаг 2. <em>Запрос</em> из четырёх пунктов</h2>
+<p>Без этих пунктов Claude угадывает, и выходит шаблон с пустыми местами. С ними он знает, что сказать, кому и как это должно выглядеть.</p>
+<section class="card warn"><span class="num">ШАБЛОН</span><h2>Скопируй и заполни скобки</h2><div class="code"><pre>Сделай презентацию и отдай файл PPTX.
+
+О чём: [тема и главная мысль: что зритель должен понять и сделать после]
+Кто будет смотреть: [клиенты, инвесторы, команда или ученики; что им важно]
+Мои цифры: [результаты, цены, сроки, факты, которые должны быть на слайдах]
+Примеры дизайна: [2 или 3 ссылки или скриншота, которые нравятся, и что в них нравится]
+
+Используй навыки frontend-design, ui-ux-pro-max, antislop, pptx и мой навык со стилем.
+Слайдов: от 8 до 12. Сначала покажи план слайдов, потом собирай.</pre><button type="button">Копировать</button></div></section>
+<section class="card"><h2>Что писать в каждом пункте</h2><ul>
+<li><b>О чём.</b> Одна главная мысль и что человек должен сделать после: купить, записаться, согласовать.</li>
+<li><b>Кто будет смотреть.</b> От этого зависят тон, глубина и сколько текста на слайде.</li>
+<li><b>Твои цифры.</b> Без них Claude придумает свои. Дай реальные результаты, цены и сроки.</li>
+<li><b>Примеры дизайна.</b> Прикрепи 2 или 3 скриншота или ссылки и скажи, что в них нравится: цвет, шрифт, крупные цифры.</li>
+</ul></section>
+<section class="card"><span class="num">ПРИМЕР</span><h2>Так выглядит заполненный запрос</h2><div class="code"><pre>Сделай презентацию и отдай файл PPTX.
+
+О чём: как ИИ забирает рутину у малого бизнеса. Главная мысль: за месяц можно освободить 12 часов в неделю.
+Кто будет смотреть: владельцы небольших магазинов и салонов на моём вебинаре. Им важно, сколько это стоит и сколько времени займёт.
+Мои цифры: минус 12 часов рутины в неделю, заявок в 3 раза больше, 0 ₽ на подрядчиков, 48 заявок за месяц.
+Примеры дизайна: тёмный фон, сине-сиреневые акценты, крупные цифры, как на скриншотах ниже.
+
+Используй навыки frontend-design, ui-ux-pro-max, antislop, pptx и мой навык со стилем.
+Слайдов: 10. Сначала покажи план слайдов, потом собирай.</pre><button type="button">Копировать</button></div></section>
+<section class="card"><h2>Если нужно поправить</h2><p>Пиши правки по номеру слайда: «на слайде 3 сделай цифру крупнее, на слайде 5 убери лишний текст». Claude поправит только их и отдаст новый файл.</p></section>
+</div>
+<div class="foot"><p class="mut">Больше разборов нейросетей и готовых навыков в моём Телеграм-канале</p><a class="btn" href="https://t.me/aivwb">Перейти в канал @aivwb</a></div>
+</main><script>document.querySelectorAll(".code button").forEach(b=>b.addEventListener("click",async()=>{const t=b.parentElement.querySelector("pre").innerText;try{await navigator.clipboard.writeText(t);b.textContent="Скопировано"}catch(e){const r=document.createRange();r.selectNodeContents(b.parentElement.querySelector("pre"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Выделено, нажми копировать"}setTimeout(()=>b.textContent="Копировать",2000)}));</script><script>
+const ENDPOINT="https://motion-leads-production.up.railway.app/lead",KEY="slides-access";
+const fm=document.getElementById("lead"),ph=document.getElementById("phone"),tgI=document.getElementById("tg"),er=document.getElementById("err"),sb=document.getElementById("send");
+function unlock(s){fm.hidden=true;const g=document.getElementById("guide");g.hidden=false;if(s)setTimeout(()=>g.scrollIntoView({behavior:"smooth",block:"start"}),150)}
+try{if(localStorage.getItem(KEY))unlock(false)}catch(e){}
+ph.addEventListener("input",()=>{let d=ph.value.replace(/\D/g,"");if(!d){ph.value="";return}if(d[0]==="8")d="7"+d.slice(1);if(d[0]==="9")d="7"+d;if(d[0]!=="7"){ph.value="+"+d.slice(0,15);return}let p="+7";if(d.length>1)p+=" "+d.slice(1,4);if(d.length>4)p+=" "+d.slice(4,7);if(d.length>7)p+="-"+d.slice(7,9);if(d.length>9)p+="-"+d.slice(9,11);ph.value=p});
+tgI.addEventListener("input",()=>{let v=tgI.value.replace(/https?:\/\/t\.me\//i,"").replace(/\s/g,"");if(v&&v[0]!=="@")v="@"+v;tgI.value=v});
+[ph,tgI].forEach(el=>el.addEventListener("focus",()=>el.classList.remove("bad")));
+function bad(el,m){el.classList.add("bad");er.textContent=m;el.focus()}
+fm.addEventListener("submit",e=>{e.preventDefault();er.textContent="";
+const dg=ph.value.replace(/\D/g,"");if(dg.length<10||dg.length>15)return bad(ph,"Проверь номер телефона");
+if(!/^@[A-Za-z0-9_]{4,32}$/.test(tgI.value))return bad(tgI,"Ник в Telegram: латиница, цифры и _, от 4 символов");
+if(!document.getElementById("consent").checked){er.textContent="Поставь галочку согласия";return}
+sb.disabled=true;sb.textContent="Открываю…";let done=false;const fin=()=>{if(done)return;done=true;try{localStorage.setItem(KEY,"1")}catch(e){}unlock(true)};setTimeout(fin,6000);
+fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone:ph.value,tg:tgI.value,consent:true,product:"slides",website:fm.website.value,src:("ГАЙД СЛАЙДЫ · "+(new URLSearchParams(location.search).get("utm_source")||document.referrer||"прямой заход")).slice(0,100)})})
+.then(r=>r.json().catch(()=>({})).then(j=>({r,j}))).then(x=>{if(!x.r.ok&&x.j&&(x.j.error==="phone"||x.j.error==="tg")){done=true;sb.disabled=false;sb.textContent="Открыть";return x.j.error==="phone"?bad(ph,"Проверь номер телефона"):bad(tgI,"Проверь ник в Telegram")}fin()}).catch(fin)});
+</script>
+</body></html>
