@@ -133,7 +133,7 @@ function result(){
  $("unit").textContent=plural(week,"час","часа","часов")+" в неделю";
  $("year").textContent=year.toLocaleString("ru-RU");
  $("seasons").textContent=seasons;$("seasonsUnit").textContent=plural(seasons,"сезон","сезона","сезонов")+" сериала 🍿";
- $("top").innerHTML=items.slice(0,3).map(x=>`<div>${TASKS[x.i][0]} ${TASKS[x.i][1]}<span>−${Math.round(x.save*10)/10} ч</span></div>`).join("");
+ $("top").innerHTML=items.slice(0,3).map(x=>`<div>${TASKS[x.i][0]} ${TASKS[x.i][1]}<span>−${(Math.round(x.save*10)/10).toLocaleString("ru-RU")} ч</span></div>`).join("");
  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,t0=performance.now(),dur=reduce?0:1400;
  (function tick(t){const k=dur?Math.min(1,(t-t0)/dur):1,e=1-Math.pow(1-k,3);
   $("num").textContent=Math.round(week*e);if(k<1)requestAnimationFrame(tick);else if(!reduce)confetti()})(t0)}
