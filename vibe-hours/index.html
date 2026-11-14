@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Сколько часов съедает рутина</title>
+<meta name="description" content="Отметь задачи недели и посчитай, сколько часов может вернуть тебе ИИ">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Unbounded:wght@700;800&display=swap">
+<style>/* Три экрана: выбор задач, часы по ползункам, результат со счётчиком и конфетти */
+:root{--bg:#0E0E0E;--card:#171716;--line:#2A2926;--ink:#F4F1EA;--mut:#9A968E;--or:#E8744F;--bl:#6E9BFF;
+--disp:"Unbounded","Montserrat",system-ui,sans-serif;--body:"Montserrat",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
+padding:28px max(16px,env(safe-area-inset-right,0px)) calc(110px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.step{font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,7vw,40px);line-height:1.1;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--or)}
+p{margin:0}.mut{color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:520px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile{display:flex;flex-direction:column;gap:8px;align-items:flex-start;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;
+padding:14px;color:var(--ink);font:600 15px/1.25 var(--body);cursor:pointer;min-height:96px;transition:border-color .15s,transform .15s,background .15s}
+.tile .ic{font-size:28px;line-height:1}
+.tile[aria-pressed="true"]{border-color:var(--or);background:#24160F}
+.tile:active{transform:scale(.97)}
+.row{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:10px}
+.row-top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:700}
+.row-top output{font-family:var(--disp);color:var(--or);font-size:20px;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--or);height:32px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(transparent,var(--bg) 30%);padding:24px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar .in{max-width:620px;margin:0 auto;display:flex;gap:10px}
+button.go,a.go{flex:1;display:flex;align-items:center;justify-content:center;border:0;border-radius:16px;padding:17px 18px;background:var(--or);color:#140A05;
+font:800 16px var(--body);letter-spacing:.02em;text-decoration:none;cursor:pointer;text-align:center}
+button.go:disabled{opacity:.4}
+button.back{border:2px solid var(--line);background:transparent;color:var(--ink);border-radius:16px;padding:0 18px;font:700 16px var(--body);cursor:pointer}
+.big{font-family:var(--disp);font-weight:800;font-size:clamp(64px,22vw,120px);line-height:1;color:var(--or);font-variant-numeric:tabular-nums}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fact{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px}
+.fact b{display:block;font-family:var(--disp);font-size:28px;color:var(--bl);line-height:1.1}
+.top{display:grid;gap:10px;counter-reset:t}
+.top div{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;gap:12px;align-items:center;font-weight:700}
+.top div::before{counter-increment:t;content:counter(t);font-family:var(--disp);color:var(--or);font-size:20px}
+.top div span{margin-left:auto;color:var(--mut);font-weight:600;white-space:nowrap}
+.note{font-size:13px;color:var(--mut)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--bl);outline-offset:2px}
+[hidden]{display:none!important}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:9}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}}
+</style></head><body>
+<main class="wrap">
+
+<section id="s1">
+<div class="wrap">
+<div class="step">Шаг 1 из 3</div>
+<h1>Отметь, что ты делаешь <em>каждую неделю</em></h1>
+<p class="mut">Можно выбрать несколько</p>
+<div class="grid" id="tiles"></div>
+</div>
+</section>
+
+<section id="s2" hidden>
+<div class="wrap">
+<div class="step">Шаг 2 из 3</div>
+<h1>Сколько часов в неделю <em>уходит</em> на каждое?</h1>
+<p class="mut">Примерно, точность не нужна</p>
+<div id="rows" class="wrap" style="gap:10px"></div>
+</div>
+</section>
+
+<section id="s3" hidden>
+<div class="wrap">
+<div class="step">Твой результат</div>
+<h1>ИИ может вернуть тебе около</h1>
+<div><div class="big" id="num">0</div><p style="font-weight:700;font-size:20px" id="unit">часов в неделю</p></div>
+<div class="facts">
+<div class="fact"><b id="year">0</b><span class="mut">часов в год</span></div>
+<div class="fact"><b id="seasons">0</b><span class="mut" id="seasonsUnit">сезонов сериала 🍿</span></div>
+</div>
+<h1 style="font-size:clamp(20px,5vw,26px)">Что отдать ИИ <em>первым</em></h1>
+<div class="top" id="top"></div>
+<p class="note">Оценка: для каждой задачи своя доля, которую обычно забирает ИИ, от 40 до 70%</p>
+</div>
+</section>
+
+</main>
+<div class="bar"><div class="in">
+<button class="back" id="back" hidden aria-label="Назад">←</button>
+<button class="go" id="next" disabled>Дальше</button>
+<a class="go" id="help" hidden>⚡️ Собрать первого помощника</a>
+</div></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<script>
+const TASKS=[
+ ["💬","Ответы клиентам",.7],["📸","Посты и сторис",.6],["📊","Таблицы и отчёты",.65],["🔎","Поиск информации",.7],
+ ["📦","Переписка с поставщиками",.5],["📄","Документы",.6],["🛍","Карточки товаров",.65],["🗓","Планирование",.4],
+ ["🌍","Переводы",.7],["💰","Счёт денег",.5],["✉️","Письма",.6],["💡","Идеи для контента",.6]];
+const st={sel:new Set(),h:{},screen:1};
+const $=id=>document.getElementById(id);
+const bot=new URLSearchParams(location.search).get("bot")||"";
+$("help").href=bot?`https://t.me/${bot}?start=prompt`:"https://t.me/olgapuzanovva";
+function plural(n,a,b,c){n=Math.abs(n)%100;if(n>10&&n<20)return c;n%=10;return n==1?a:n>=2&&n<=4?b:c}
+
+TASKS.forEach(([ic,name],i)=>{
+ const b=document.createElement("button");b.className="tile";b.setAttribute("aria-pressed","false");
+ b.innerHTML=`<span class="ic">${ic}</span>${name}`;
+ b.onclick=()=>{st.sel.has(i)?st.sel.delete(i):st.sel.add(i);b.setAttribute("aria-pressed",st.sel.has(i));
+  if(navigator.vibrate)navigator.vibrate(8);$("next").disabled=!st.sel.size};
+ $("tiles").append(b)});
+
+function rows(){
+ $("rows").innerHTML="";
+ [...st.sel].sort((a,b)=>a-b).forEach(i=>{
+  if(st.h[i]==null)st.h[i]=3;
+  const r=document.createElement("div");r.className="row";
+  r.innerHTML=`<div class="row-top"><span>${TASKS[i][0]} ${TASKS[i][1]}</span><output>${st.h[i]} ч</output></div>
+  <input type="range" min="1" max="20" step="1" value="${st.h[i]}" aria-label="${TASKS[i][1]}, часов в неделю">`;
+  const inp=r.querySelector("input"),out=r.querySelector("output");
+  inp.oninput=()=>{st.h[i]=+inp.value;out.textContent=inp.value+" ч"};
+  $("rows").append(r)})}
+
+function show(n){
+ st.screen=n;[1,2,3].forEach(k=>$("s"+k).hidden=k!==n);
+ $("back").hidden=n===1;$("next").hidden=n===3;$("help").hidden=n!==3;
+ $("next").textContent=n===2?"Посчитать":"Дальше";scrollTo({top:0,behavior:"instant"});
+ if(n===2)rows();if(n===3)result()}
+
+$("next").onclick=()=>show(st.screen+1);
+$("back").onclick=()=>show(st.screen-1);
+
+function result(){
+ const items=[...st.sel].map(i=>({i,save:st.h[i]*TASKS[i][2]})).sort((a,b)=>b.save-a.save);
+ const week=Math.max(1,Math.round(items.reduce((s,x)=>s+x.save,0)));
+ const year=week*52,seasons=Math.max(1,Math.round(year/7.5));
+ $("unit").textContent=plural(week,"час","часа","часов")+" в неделю";
+ $("year").textContent=year.toLocaleString("ru-RU");
+ $("seasons").textContent=seasons;$("seasonsUnit").textContent=plural(seasons,"сезон","сезона","сезонов")+" сериала 🍿";
+ $("top").innerHTML=items.slice(0,3).map(x=>`<div>${TASKS[x.i][0]} ${TASKS[x.i][1]}<span>−${Math.round(x.save*10)/10} ч</span></div>`).join("");
+ const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,t0=performance.now(),dur=reduce?0:1400;
+ (function tick(t){const k=dur?Math.min(1,(t-t0)/dur):1,e=1-Math.pow(1-k,3);
+  $("num").textContent=Math.round(week*e);if(k<1)requestAnimationFrame(tick);else if(!reduce)confetti()})(t0)}
+
+function confetti(){
+ const c=$("fx"),x=c.getContext("2d"),d=devicePixelRatio||1;c.width=innerWidth*d;c.height=innerHeight*d;x.scale(d,d);
+ const col=["#E8744F","#6E9BFF","#F4F1EA","#FFC857"],P=[...Array(140)].map(()=>({x:innerWidth/2,y:innerHeight*.35,
+  vx:(Math.random()-.5)*14,vy:-Math.random()*13-4,s:Math.random()*7+4,r:Math.random()*6,c:col[Math.random()*4|0]}));
+ let f=0;(function loop(){x.clearRect(0,0,innerWidth,innerHeight);
+  P.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore()});
+  if(++f<160)requestAnimationFrame(loop);else x.clearRect(0,0,innerWidth,innerHeight)})()}
+</script>
+</body></html>
