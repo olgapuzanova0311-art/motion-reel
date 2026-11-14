@@ -96,7 +96,7 @@ const TASKS=[
 const st={sel:new Set(),h:{},screen:1};
 const $=id=>document.getElementById(id);
 const bot=new URLSearchParams(location.search).get("bot")||"";
-$("help").href=bot?`https://t.me/${bot}?start=prompt`:"https://t.me/olgapuzanovva";
+$("help").href=bot?`https://t.me/${bot}?start=vprompt`:"https://t.me/olgapuzanovva";
 function plural(n,a,b,c){n=Math.abs(n)%100;if(n>10&&n<20)return c;n%=10;return n==1?a:n>=2&&n<=4?b:c}
 
 TASKS.forEach(([ic,name],i)=>{
